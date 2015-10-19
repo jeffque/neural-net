@@ -5,8 +5,8 @@ import static org.junit.Assert.*;
 import org.junit.Test;
 
 import br.com.jeffque.neural.utils.Function;
-import br.com.jeffque.neural.utils.activator.HardLimiter;
-import br.com.jeffque.neural.utils.activator.SymmetricHardLimiter;
+import br.com.jeffque.neural.activator.HardLimiter;
+import br.com.jeffque.neural.activator.SymmetricHardLimiter;
 
 public class NonDifferentiableTest {
 

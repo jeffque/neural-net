@@ -1,4 +1,4 @@
-package br.com.jeffque.neural.utils.activator;
+package br.com.jeffque.neural.activator;
 
 public class HardLimiter extends NonDifferentiableFunction {
 
