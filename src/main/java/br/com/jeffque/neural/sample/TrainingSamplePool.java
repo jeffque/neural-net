@@ -1,6 +1,7 @@
 package br.com.jeffque.neural.sample;
 
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.Iterator;
 import java.util.List;
 
@@ -15,8 +16,28 @@ public class TrainingSamplePool implements Iterable<TrainingSample> {
 		validationPool.add(validation);
 	}
 	
+	public void addValidations(Collection<TrainingSample> validations) {
+		validationPool.addAll(validations);
+	}
+	
+	public void addValidations(TrainingSample[] validations) {
+		for (TrainingSample validation: validations) {
+			validationPool.add(validation);
+		}
+	}
+	
 	public void addSample(TrainingSample sample) {
 		trainingPool.add(sample);
+	}
+	
+	public void addSamples(Collection<TrainingSample> samples) {
+		trainingPool.addAll(samples);
+	}
+	
+	public void addSamples(TrainingSample[] samples) {
+		for (TrainingSample sample: samples) {
+			trainingPool.add(sample);
+		}
 	}
 	
 	public TrainingSample getSample(int idx) {
