@@ -59,6 +59,7 @@ public class Perceptron {
 					}
 				}
 			}
+			age++;
 		} while(existsError);
 		
 		return age;
