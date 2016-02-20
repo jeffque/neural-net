@@ -64,5 +64,25 @@ public class Perceptron {
 		
 		return age;
 	}
+
+	/**
+	 * 
+	 * @param pool
+	 * @param acceptance
+	 * @return How many samples from the sample are out of acceptance
+	 */
+	public int validation(TrainingSamplePool pool, double acceptance) {
+		int nErrors = 0;
+		for (TrainingSample sample: pool) {
+			double[] input = sample.getValues();
+			double y = judgeInput(input);
+			double error = sample.error(y);
+			
+			if (Math.abs(error) > acceptance) {
+				nErrors++;
+			}
+		}
+		return nErrors;
+	}
 	
 }
