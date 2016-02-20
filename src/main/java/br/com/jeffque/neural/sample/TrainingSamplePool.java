@@ -6,8 +6,14 @@ import java.util.List;
 
 public class TrainingSamplePool implements Iterable<TrainingSample> {
 	private boolean useTrainingPool = true;
+	private boolean useValidationPool = false;
 	
 	private List<TrainingSample> trainingPool = new ArrayList<>();
+	private List<TrainingSample> validationPool = new ArrayList<>();
+	
+	public void addValidation(TrainingSample validation) {
+		validationPool.add(validation);
+	}
 	
 	public void addSample(TrainingSample sample) {
 		trainingPool.add(sample);
@@ -22,13 +28,22 @@ public class TrainingSamplePool implements Iterable<TrainingSample> {
 				n -= trainingPool.size();
 			}
 		}
-		throw new IndexOutOfBoundsException("Index " + idx + " is out of the range for: " + (useTrainingPool? " training":""));
+		if (useValidationPool) {
+			try {
+				return validationPool.get(n);
+			} catch (IndexOutOfBoundsException e) {
+			}
+		}
+		throw new IndexOutOfBoundsException("Index " + idx + " is out of the range for: " + (useTrainingPool? " training":"") + (useValidationPool? " validation": ""));
 	}
 	
 	public int getSize() {
 		int size = 0;
 		if (useTrainingPool) {
 			size += trainingPool.size();
+		}
+		if (useValidationPool) {
+			size += validationPool.size();
 		}
 		return size;
 	}
@@ -38,6 +53,9 @@ public class TrainingSamplePool implements Iterable<TrainingSample> {
 		List<TrainingSample> usedSample = new ArrayList<>();
 		if (useTrainingPool) {
 			usedSample.addAll(trainingPool);
+		}
+		if (useValidationPool) {
+			usedSample.addAll(validationPool);
 		}
 		return usedSample.iterator();
 	}
