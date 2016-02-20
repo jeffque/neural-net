@@ -53,14 +53,6 @@ public class Perceptron {
 	public int training(TrainingFactorYielder trainingFactor, TrainingSamplePool pool, double acceptance, int ageLimit) {
 		int age = 0;
 		
-		if (pool.getSize() == 0) {
-			throw new RuntimeException();
-		}
-		
-		if (pool.getSample(0).getSize() != getInputSize()) {
-			throw new RuntimeException();
-		}
-		
 		while (trainingCore(trainingFactor, pool, acceptance, age) && age < ageLimit) {
 			age++;
 		}
@@ -70,14 +62,6 @@ public class Perceptron {
 	
 	public int training(TrainingFactorYielder trainingFactor, TrainingSamplePool pool, double acceptance) {
 		int age = 0;
-		
-		if (pool.getSize() == 0) {
-			throw new RuntimeException();
-		}
-		
-		if (pool.getSample(0).getSize() != getInputSize()) {
-			throw new RuntimeException();
-		}
 		
 		while (trainingCore(trainingFactor, pool, acceptance, age)) {
 			age++;
