@@ -50,6 +50,24 @@ public class Perceptron {
 		return existsError;
 	}
 	
+	public int training(TrainingFactorYielder trainingFactor, TrainingSamplePool pool, double acceptance, int ageLimit) {
+		int age = 0;
+		
+		if (pool.getSize() == 0) {
+			throw new RuntimeException();
+		}
+		
+		if (pool.getSample(0).getSize() != getInputSize()) {
+			throw new RuntimeException();
+		}
+		
+		while (trainingCore(trainingFactor, pool, acceptance, age) && age < ageLimit) {
+			age++;
+		}
+		
+		return age + 1 /* The last run isn't accounted */;
+	}
+	
 	public int training(TrainingFactorYielder trainingFactor, TrainingSamplePool pool, double acceptance) {
 		int age = 0;
 		
