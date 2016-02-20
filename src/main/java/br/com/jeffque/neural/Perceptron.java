@@ -55,7 +55,7 @@ public class Perceptron {
 					double aleph = trainingFactor.yieldAleph(age);
 					
 					for (int i = weights.length - 1; i >= 0; i--) {
-						weights[i] = weights[i] - aleph *(error) * input[i];
+						weights[i] = weights[i] + aleph *(error) * input[i];
 					}
 				}
 			}
