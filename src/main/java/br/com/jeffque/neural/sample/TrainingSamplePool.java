@@ -9,6 +9,22 @@ public class TrainingSamplePool implements Iterable<TrainingSample> {
 	private boolean useTrainingPool = true;
 	private boolean useValidationPool = false;
 	
+	public boolean isUseTrainingPool() {
+		return useTrainingPool;
+	}
+
+	public void setUseTrainingPool(boolean useTrainingPool) {
+		this.useTrainingPool = useTrainingPool;
+	}
+
+	public boolean isUseValidationPool() {
+		return useValidationPool;
+	}
+
+	public void setUseValidationPool(boolean useValidationPool) {
+		this.useValidationPool = useValidationPool;
+	}
+
 	private List<TrainingSample> trainingPool = new ArrayList<>();
 	private List<TrainingSample> validationPool = new ArrayList<>();
 	
