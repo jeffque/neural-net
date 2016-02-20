@@ -1,34 +1,21 @@
 package br.com.jeffque.neural;
 
-import static org.junit.Assert.*;
-
 import org.junit.Test;
 
-import br.com.jeffque.neural.utils.Function;
 import br.com.jeffque.neural.activator.HardLimiter;
 import br.com.jeffque.neural.activator.SymmetricHardLimiter;
 
 public class NonDifferentiableTest {
 
-	public void verifyDifferentaibility(Function f) {
-		Exception ex = null;
-		try {
-			f.dy(0);
-		} catch(UnsupportedOperationException e) {
-			ex = e;
-		}
-		
-		assertNotNull(ex);
-	}
 	
-	@Test
+	@Test(expected = UnsupportedOperationException.class)
 	public void hardLimiter() {
-		verifyDifferentaibility(new HardLimiter());
+		new HardLimiter().dy(0);
 	}
 	
-	@Test
+	@Test(expected = UnsupportedOperationException.class)
 	public void symmetricHardLimiter() {
-		verifyDifferentaibility(new SymmetricHardLimiter());
+		new SymmetricHardLimiter().dy(0);
 	}
 
 }
