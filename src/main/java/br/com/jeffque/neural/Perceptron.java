@@ -30,9 +30,28 @@ public class Perceptron {
 		return activator.y(NeuralUtils.dotProduct(input, weights) - bias);
 	}
 	
+	private boolean trainingCore(TrainingFactorYielder trainingFactor, TrainingSamplePool pool, double acceptance, int age) {
+		boolean existsError = false;
+		for (TrainingSample sample: pool) {
+			double[] input = sample.getValues();
+			double y = judgeInput(input);
+			double error = sample.error(y);
+			
+			if (Math.abs(error) > acceptance) {
+				existsError = true;
+				double aleph = trainingFactor.yieldAleph(age);
+				
+				for (int i = weights.length - 1; i >= 0; i--) {
+					weights[i] = weights[i] + aleph *(error) * input[i];
+				}
+			}
+		}
+		
+		return existsError;
+	}
+	
 	public int training(TrainingFactorYielder trainingFactor, TrainingSamplePool pool, double acceptance) {
 		int age = 0;
-		boolean existsError;
 		
 		if (pool.getSize() == 0) {
 			throw new RuntimeException();
@@ -42,27 +61,11 @@ public class Perceptron {
 			throw new RuntimeException();
 		}
 		
-		do {
-			existsError = false;
-			
-			for (TrainingSample sample: pool) {
-				double[] input = sample.getValues();
-				double y = judgeInput(input);
-				double error = sample.error(y);
-				
-				if (Math.abs(error) > acceptance) {
-					existsError = true;
-					double aleph = trainingFactor.yieldAleph(age);
-					
-					for (int i = weights.length - 1; i >= 0; i--) {
-						weights[i] = weights[i] + aleph *(error) * input[i];
-					}
-				}
-			}
+		while (trainingCore(trainingFactor, pool, acceptance, age)) {
 			age++;
-		} while(existsError);
+		}
 		
-		return age;
+		return age + 1 /* The last run isn't accounted */;
 	}
 
 	/**
