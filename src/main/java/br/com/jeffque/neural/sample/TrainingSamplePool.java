@@ -96,4 +96,33 @@ public class TrainingSamplePool implements Iterable<TrainingSample> {
 		}
 		return usedSample.iterator();
 	}
+	
+	/**
+	 * 
+	 * @return If all samples are the same size, and that the size is greater than 0
+	 */
+	public boolean isValid() {
+		if (trainingPool.size() == 0) {
+			return false;
+		}
+		
+		int size = trainingPool.get(0).getSize();
+		if (size == 0) {
+			return false;
+		}
+		
+		for (int i = trainingPool.size() - 1; i >= 1; i--) {
+			if (trainingPool.get(i).getSize() != size) {
+				return false;
+			}
+		}
+		
+		for (int i = validationPool.size() - 1; i >= 0; i--) {
+			if (validationPool.get(i).getSize() != size) {
+				return false;
+			}
+		}
+		
+		return true;
+	}
 }
