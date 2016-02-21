@@ -89,5 +89,9 @@ public class Perceptron {
 		}
 		return nErrors;
 	}
+
+	public boolean isPoolValid(TrainingSamplePool pool) {
+		return pool.isValid() && pool.getSample(0).getSize() == getInputSize();
+	}
 	
 }
