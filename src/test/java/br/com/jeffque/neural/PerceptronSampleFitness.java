@@ -3,15 +3,12 @@ package br.com.jeffque.neural;
 import static org.hamcrest.Matchers.*;
 import static org.junit.Assert.*;
 
-import org.hamcrest.core.IsEqual;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
 import br.com.jeffque.neural.activator.HardLimiter;
-import br.com.jeffque.neural.activator.SymmetricHardLimiter;
 import br.com.jeffque.neural.sample.TrainingSample;
 import br.com.jeffque.neural.sample.TrainingSamplePool;
-import br.com.jeffque.neural.utils.TrainingFactorYielder;
 
 public class PerceptronSampleFitness {
 	
